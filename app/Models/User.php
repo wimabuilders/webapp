@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Str;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +10,7 @@ use Wave\Traits\HasProfileKeyValues;
 
 class User extends WaveUser
 {
-    use Notifiable, HasProfileKeyValues;
+    use Notifiable, HasProfileKeyValues, HasUuids;
 
     public $guard_name = 'web';
 
@@ -43,7 +44,7 @@ class User extends WaveUser
     protected static function boot()
     {
         parent::boot();
-        
+
         // Listen for the creating event of the model
         static::creating(function ($user) {
             // Check if the username attribute is empty

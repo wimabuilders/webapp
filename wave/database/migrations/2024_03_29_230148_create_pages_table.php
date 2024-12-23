@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id'); // Auto-incrementing UNSIGNED INTEGER (primary key)
-            $table->unsignedBigInteger('author_id'); // UNSIGNED INTEGER for the foreign key to users table
+            $table->foreignIdFor(\App\Models\User::class, 'author_id'); // UNSIGNED INTEGER for the foreign key to users table
             $table->string('title', 191); // VARCHAR equivalent column
             $table->text('excerpt')->nullable(); // TEXT column, nullable for the excerpt
             $table->text('body'); // TEXT column for the main content
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps(); // Adds created_at and updated_at columns
 
             // Foreign key constraint
-            $table->foreign('author_id')->references('id')->on('users'); // Adjust if the users table or author_id column is named differently
+            // $table->foreign('author_id')->references('id')->on('users'); // Adjust if the users table or author_id column is named differently
         });
     }
 

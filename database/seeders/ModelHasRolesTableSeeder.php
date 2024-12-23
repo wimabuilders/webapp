@@ -23,7 +23,7 @@ class ModelHasRolesTableSeeder extends Seeder
             array (
                 'role_id' => 1,
                 'model_type' => 'users',
-                'model_id' => 1
+                'model_id' => \App\Models\User::first()->id
             ),
         ));
 

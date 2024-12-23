@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('changelog_user', function (Blueprint $table) {
             $table->unsignedInteger('changelog_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade');
 
             // Indexes
             $table->index('changelog_id', 'changelog_user_changelog_id_index');
@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Foreign keys
             $table->foreign('changelog_id')->references('id')->on('changelogs')->onDelete('cascade')->onUpdate('restrict');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
 
             // Setting the primary keys
             $table->primary(['changelog_id', 'user_id']);

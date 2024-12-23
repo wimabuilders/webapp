@@ -22,7 +22,7 @@ class PostsTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 5,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 1,
                 'title' => 'Best ways to market your application',
                 'seo_title' => 'Best ways to market your application',
@@ -58,7 +58,7 @@ class PostsTableSeeder extends Seeder
             1 =>
             array (
                 'id' => 6,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 1,
                 'title' => 'Achieving your Dreams',
                 'seo_title' => 'Achieving your Dreams',
@@ -94,7 +94,7 @@ class PostsTableSeeder extends Seeder
             2 =>
             array (
                 'id' => 7,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 1,
                 'title' => 'Building a solid foundation',
                 'seo_title' => 'Building a solid foundation',
@@ -130,7 +130,7 @@ class PostsTableSeeder extends Seeder
             3 =>
             array (
                 'id' => 8,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 2,
                 'title' => 'Finding the solution that fits for you',
                 'seo_title' => 'Finding the solution that fits for you',
@@ -166,7 +166,7 @@ class PostsTableSeeder extends Seeder
             4 =>
             array (
                 'id' => 9,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 2,
                 'title' => 'Creating something useful',
                 'seo_title' => 'Creating something useful',
@@ -202,7 +202,7 @@ class PostsTableSeeder extends Seeder
             5 =>
             array (
                 'id' => 10,
-                'author_id' => 1,
+                'author_id' => \App\Models\User::first()->id,
                 'category_id' => 1,
                 'title' => 'Never Stop Creating',
                 'seo_title' => 'Never Stop Creating',

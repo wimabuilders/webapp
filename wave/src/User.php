@@ -70,7 +70,7 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
         return true;
     }
 
-    
+
 
     public function subscriptions()
     {
@@ -98,7 +98,7 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
 
     public function planInterval(){
         $latest_subscription = $this->latestSubscription();
-        return ($latest_subscription->cycle == 'month') ? 'Monthly' : 'Yearly'; 
+        return ($latest_subscription->cycle == 'month') ? 'Monthly' : 'Yearly';
     }
 
     public function latestSubscription()
@@ -125,7 +125,7 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
 
         if(config('wave.billing_provider') == 'stripe'){
             $stripe = new \Stripe\StripeClient(config('wave.stripe.secret_key'));
-            $subscriptions = $this->subscriptions()->get();        
+            $subscriptions = $this->subscriptions()->get();
             foreach($subscriptions as $subscription){
                 $invoices = $stripe->invoices->all([ 'customer' => $subscription->vendor_customer_id, 'limit' => 100 ]);
 
@@ -138,7 +138,7 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
                     ]);
                 }
             }
-        } else { 
+        } else {
             $paddle_url = (config('wave.paddle.env') == 'sandbox') ? 'https://sandbox-api.paddle.com' : 'https://api.paddle.com';
             $response = Http::withToken(config('wave.paddle.api_key'))->get($paddle_url . '/transactions', [
                 'subscription_id' => $this->subscription->vendor_subscription_id

@@ -14,15 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
-        \DB::table('users')->insert(array (
-            0 => 
-            array (
-                'id' => 1,
-                'name' => 'Wave Admin',
+
+        \App\Models\User::create([
+            'name' => 'Wave Admin',
                 'email' => 'admin@admin.com',
                 'username' => 'admin',
                 'avatar' => 'demo/default.png',
@@ -33,9 +30,6 @@ class UsersTableSeeder extends Seeder
                 'trial_ends_at' => NULL,
                 'verification_code' => NULL,
                 'verified' => 1,
-            ),
-        ));
-        
-        
+        ]);
     }
 }

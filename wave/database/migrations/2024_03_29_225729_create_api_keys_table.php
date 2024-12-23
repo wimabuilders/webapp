@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('user_id'); // Changed to unsignedBigInteger to match the users.id column type
+            $table->foreignIdFor(\App\Models\User::class)->onDelete('cascade'); // Changed to unsignedBigInteger to match the users.id column type
             $table->string('name', 191);
             $table->string('key', 60)->unique();
             $table->dateTime('last_used_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
