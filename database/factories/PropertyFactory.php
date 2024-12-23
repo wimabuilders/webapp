@@ -26,7 +26,6 @@ class PropertyFactory extends Factory
             'sqft' => fake()->optional()->numberBetween(500, 10000),
             'price' => fake()->randomFloat(2, 50000, 10000000),
             'for_rent' => fake()->boolean(),
-            'tags' => $selectedTags,
             'type' => fake()->optional()->randomElement($propertyTypes),
             'year' => fake()->optional()->year(),
             'featured' => fake()->boolean(10), // 10% chance to be featured
