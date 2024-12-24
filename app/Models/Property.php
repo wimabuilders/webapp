@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, SoftDeletes;
 
     protected $guarded = [];
 
@@ -20,5 +21,10 @@ class Property extends Model
     function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(PropertyType::class, 'property_type_id');
     }
 }

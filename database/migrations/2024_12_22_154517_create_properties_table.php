@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
+        Schema::create('property_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('properties', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title')->nullable();
@@ -21,11 +24,12 @@ return new class extends Migration
             $table->integer('sqft')->nullable();
             $table->decimal('price', 15, 2);
             $table->boolean('for_rent')->default(0);
-            $table->string('type')->nullable();
+            $table->string('property_type_id')->nullable();
             $table->year('year')->nullable();
             $table->boolean('featured')->default(0);
             $table->decimal('lat', 10, 7)->nullable();
             $table->decimal('long', 10, 7)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -35,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('properties', 'property_types');
     }
 };
