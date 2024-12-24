@@ -38,7 +38,7 @@ class PropertyManager extends Component implements HasForms
     {
         $data = $this->form->getState();
 
-        if ($this->create) $this->property = Property::create($data);
+        if ($this->create) $this->property = Property::create([...$data, 'user_id' => auth()->id()]);
         else $this->property->update($data);
 
         $this->redirectRoute('properties.index');
