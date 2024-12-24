@@ -4,14 +4,23 @@ use App\Models\Property;
 
     use function Laravel\Folio\{middleware, name};
 	middleware('auth');
-    name('properties');
+    name('properties.index');
 
-    $properties = Property::paginate(9);
+    $properties = Property::latest()->paginate(9);
 ?>
 
 <x-layouts.app>
 	<x-app.container x-data class="lg:space-y-6 max-w-6xl" x-cloak>
-        <!-- <x-button tag="a" href="/projects/create">New Project</x-button> -->
+
+        <div class="flex justify-between items-center">
+            <x-app.heading
+                title="My Properties"
+                description="Here, you can manage your properties by adding, editing or deleting them."
+                :border="false"
+            />
+            <x-button tag="a" href="/properties/create">New Property</x-button>
+        </div>
+
         <div class="grid grid-cols-3 gap-8">
             @foreach ($properties as $property)
                 <x-property-card :property="$property" />
