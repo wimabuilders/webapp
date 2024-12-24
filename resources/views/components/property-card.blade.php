@@ -33,7 +33,7 @@
                 <div class="flex mt-1 justify-between items-center">
                     <span class="text-md font-extrabold">Ghc {{ money($property->price) }}</span>
                     <div class="flex gap-2">
-                        <a href="/properties/{{ $property->id }}/edit">
+                        <a href="{{ route('properties.edit', ['property', $property]) }}">
                             <x-heroicon-s-pencil class="p-1 h-7 w-7 text-blue-600" />
                         </a>
                         <x-heroicon-s-trash class="p-1 h-7 w-7 text-red-600" />
