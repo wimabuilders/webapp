@@ -3,11 +3,16 @@
     use App\Models\Property;
 
     use function Laravel\Folio\{middleware, name};
-	middleware('auth');
+    middleware('auth');
     name('properties.edit');
 
-    // $properties = Property::paginate(9);
+    // Abort if the user doesn't own the property
 ?>
+
+@php
+    // probably redirect user to the properties page with a message
+    if (auth()->id() !== $property->user_id) abort(403, 'Unauthorized action.');
+@endphp
 
 <x-layouts.app>
 	<x-app.container x-data class="lg:space-y-6 max-w-6xl" x-cloak>
