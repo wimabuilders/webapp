@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Forms;
+
+use App\Models\PropertyType;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Support\RawJs;
+
+class PropertyForm
+{
+    public static function schema(): array
+    {
+        return [
+            Grid::make('PropertyForm')->schema([
+                TextInput::make('title')
+                    ->columnSpan(2)
+                    ->maxLength(191)
+                    ->helperText('Eg. 3 Bedroom House at East Legon.')
+                    ->required(),
+                TextInput::make('city')
+                    ->columnSpan(2)
+                    ->maxLength(191)
+                    ->placeholder('Eg. East Legon')
+                    ->required(),
+                TextInput::make('location')
+                    ->columnSpan(2)
+                    ->placeholder('Eg. American house behind the mall.')
+                    ->maxLength(191)
+                ->required(),
+                TextInput::make('bed')
+                    ->numeric()
+                    ->required()
+                    ->default(1)
+                    ->minValue(1),
+                TextInput::make('bath')
+                    ->numeric()
+                    ->required(),
+                TextInput::make('sqft')
+                    ->numeric(),
+                TextInput::make('price')
+                    ->required()
+                    ->numeric()
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(',')
+                    ->prefix('Ghc'),
+                TextInput::make('lat')
+                    ->placeholder('Latitude')
+                    ->numeric()
+                    ->default(null),
+                TextInput::make('long')
+                    ->placeholder('Longitude')
+                    ->numeric()
+                    ->default(null),
+                Select::make('property_type_id')
+                    ->label('Property Type')
+                    ->options(PropertyType::pluck('name', 'id')->toArray())
+                    ->required(),
+                TextInput::make('year')
+                    ->placeholder('YYYY')
+                    ->numeric()
+                    ->minValue(2000)
+                    ->maxValue(2030),
+                Select::make('features')
+                    ->columnSpan(2)
+                    ->multiple()
+                    ->preload()
+                    ->relationship(titleAttribute: 'name'),
+                Select::make('tags')
+                    ->columnSpan(2)
+                    ->multiple()
+                    ->preload()
+                    ->relationship(titleAttribute: 'name'),
+                Grid::make('Toggles')->schema([
+                    Toggle::make('for_rent')
+                        ->required(),
+                    Toggle::make('featured')
+                        ->required(),
+                ])->columns(6),
+            ])->columns(6)
+        ];
+    }
+}
