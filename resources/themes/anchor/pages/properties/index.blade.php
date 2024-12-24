@@ -1,13 +1,15 @@
 <?php
 
-use App\Models\Property;
+    use App\Models\Property;
 
     use function Laravel\Folio\{middleware, name};
 	middleware('auth');
     name('properties.index');
-
-    $properties = Property::latest()->paginate(9);
 ?>
+
+@php
+    $properties = auth()->user()->properties()->paginate(9);
+@endphp
 
 <x-layouts.app>
 	<x-app.container x-data class="lg:space-y-6 max-w-6xl" x-cloak>
