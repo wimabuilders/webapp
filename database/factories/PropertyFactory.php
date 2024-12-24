@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PropertyType;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,6 +18,7 @@ class PropertyFactory extends Factory
             'title' => fake()->sentence(6, true),
             'city' => fake()->randomElement($cities),
             'location' => fake()->address(),
+            'user_id' => User::inRandomOrder()->first()->id,
             'bed' => fake()->numberBetween(1, 10),
             'bath' => fake()->numberBetween(1, 10),
             'sqft' => fake()->numberBetween(500, 10000),

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,7 @@ use Wave\Traits\HasProfileKeyValues;
 
 class User extends WaveUser
 {
-    use Notifiable, HasProfileKeyValues, HasUuids, HasFactory;
+    use Notifiable, HasProfileKeyValues, HasUuids, HasFactory, SoftDeletes;
 
     public $guard_name = 'web';
 
@@ -68,5 +69,10 @@ class User extends WaveUser
             // Assign the default role
             $user->assignRole( config('wave.default_user_role', 'registered') );
         });
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
     }
 }

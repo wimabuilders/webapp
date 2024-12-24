@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -18,7 +19,7 @@ class UsersTableSeeder extends Seeder
 
         \DB::table('users')->delete();
 
-        \App\Models\User::create([
+        User::create([
             'name' => 'Wave Admin',
                 'email' => 'admin@admin.com',
                 'username' => 'admin',
@@ -31,5 +32,7 @@ class UsersTableSeeder extends Seeder
                 'verification_code' => NULL,
                 'verified' => 1,
         ]);
+
+        User::factory(50)->create();
     }
 }

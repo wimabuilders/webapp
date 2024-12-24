@@ -16,6 +16,7 @@ return new class extends Migration
 
         Schema::create('properties', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignIdFor(\App\Models\User::class)->nullable()->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('city')->nullable();
             $table->string('location')->nullable();
