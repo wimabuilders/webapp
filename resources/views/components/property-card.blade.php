@@ -15,7 +15,7 @@
                     </span>
                 </label> -->
             </div>
-            <a href="#" class="flex flex-col mt-auto pt-4">
+            <div class="flex flex-col mt-auto pt-4">
                 <!-- <div class="flex gap-1 mb-3">
                     <span class="flex items-center text-sm px-2 py-1 rounded bg-white text-neutral-900">
                         <span>Villa</span>
@@ -33,11 +33,13 @@
                 <div class="flex mt-1 justify-between items-center">
                     <span class="text-md font-extrabold">Ghc {{ money($property->price) }}</span>
                     <div class="flex gap-2">
-                        <x-heroicon-s-pencil class="p-1 h-7 w-7 text-blue-600" />
+                        <a href="/properties/{{ $property->id }}/edit">
+                            <x-heroicon-s-pencil class="p-1 h-7 w-7 text-blue-600" />
+                        </a>
                         <x-heroicon-s-trash class="p-1 h-7 w-7 text-red-600" />
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 </article>
