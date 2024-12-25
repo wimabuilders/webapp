@@ -5,6 +5,7 @@ namespace App\Forms;
 use App\Models\PropertyType;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Support\RawJs;
@@ -18,7 +19,7 @@ class PropertyForm
                 TextInput::make('title')
                     ->columnSpan(2)
                     ->maxLength(191)
-                    ->helperText('Eg. 3 Bedroom House at East Legon.')
+                    ->placeholder('Eg. 3 Bedroom House at East Legon.')
                     ->required(),
                 TextInput::make('city')
                     ->columnSpan(2)
@@ -29,7 +30,7 @@ class PropertyForm
                     ->columnSpan(2)
                     ->placeholder('Eg. American house behind the mall.')
                     ->maxLength(191)
-                ->required(),
+                    ->required(),
                 TextInput::make('bed')
                     ->numeric()
                     ->required()
@@ -79,6 +80,20 @@ class PropertyForm
                     Toggle::make('featured')
                         ->required(),
                 ])->columns(6),
+                SpatieMediaLibraryFileUpload::make('images')
+                    ->label('Property images (drag to order)')
+                    ->disk('s3')
+                    ->multiple()
+                    ->reorderable()
+                    ->columnSpan('3')
+                    ->visibility('public')
+                    ->image()
+                    ->imageEditor()
+                    ->imagePreviewHeight(250)
+                    ->imageResizeTargetWidth('1080')
+                    ->imageEditorMode(2)
+                    ->panelLayout('grid')
+                    ->required()
             ])->columns(6)
         ];
     }

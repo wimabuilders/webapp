@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Property extends Model implements HasMedia
 {
@@ -34,5 +33,16 @@ class Property extends Model implements HasMedia
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Register the media collections
+     * To be optimized later. Not sure why getFirstMediaUrl() is retrieving the last media instead of the first
+     */
+    public function getFirstPropertyImage()
+    {
+        return !empty($this->media->sortByDesc('order_column')->first()?->getUrl()) ?
+            $this->media->sortByDesc('order_column')->first()->getUrl()
+            : env('DEFAULT_PROPERTY_IMAGE', 'https://res.cloudinary.com/dwdhm3rrc/image/upload/v1735137428/wimaDefault_vovgpc.jpg');
     }
 }
