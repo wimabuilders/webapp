@@ -4,7 +4,7 @@
 
     use function Laravel\Folio\{middleware, name};
 	middleware('auth');
-    name('properties.edit');
+    name('properties.create');
 
     $property = new Property();
 ?>
