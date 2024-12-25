@@ -1,10 +1,14 @@
 <article class="flex flex-col relative rounded-lg shadow-2xl bg-white dark:bg-neutral-800">
     <div class="relative w-full min-h-[15rem] pt-[56.25%] overflow-hidden rounded-lg text-white">
-        <img class="absolute top-0 w-full h-full object-cover" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=640&h=480&crop=entropy" loading="lazy" alt="">
-        <div class="flex flex-col justify-between w-full h-full absolute top-0 p-4 bg-gradient-to-t from-black via-black/75 to-transparent">
+        <img class="absolute top-0 w-full h-full object-cover"
+             src="{{ $property->getFirstPropertyImage() }}" loading="lazy"
+             alt="">
+        <div
+            class="flex flex-col justify-between w-full h-full absolute top-0 p-4 bg-gradient-to-t from-black via-black/75 to-transparent">
             <div class="flex gap-3 justify-between items-start">
                 <div class="flex gap-1">
-                    <span class="flex gap-1 items-center text-sm overflow-hidden px-2 py-1 rounded bg-white text-neutral-900">
+                    <span
+                        class="flex gap-1 items-center text-sm overflow-hidden px-2 py-1 rounded bg-white text-neutral-900">
                         <span>For {{ $property->for_rent ? 'rent' : 'sale' }}</span>
                     </span>
                 </div>
@@ -33,10 +37,16 @@
                 <div class="flex mt-1 justify-between items-center">
                     <span class="text-md font-extrabold">Ghc {{ money($property->price) }}</span>
                     <div class="flex gap-2">
-                        <a href="{{ route('properties.edit', ['property', $property]) }}">
-                            <x-heroicon-s-pencil class="p-1 h-7 w-7 text-blue-600" />
+                        <a href="{{ route('properties.edit', ['property' => $property]) }}">
+                            <x-heroicon-s-pencil class="p-1 h-7 w-7 text-blue-600"/>
                         </a>
-                        <x-heroicon-s-trash class="p-1 h-7 w-7 text-red-600" />
+
+                        <form id="delete-form-{{ $property->id }}" method="POST" action="{{ route('properties.destroy', $property) }}">
+                            @csrf @method('DELETE')
+                            <button onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this property?')) { document.getElementById('delete-form-{{ $property->id }}').submit(); }">
+                                <x-heroicon-s-trash class="p-1 h-7 w-7 text-red-600"/>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

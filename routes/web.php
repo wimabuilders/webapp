@@ -11,8 +11,11 @@
 |
 */
 
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use Wave\Facades\Wave;
 
 // Wave routes
 Wave::routes();
+
+Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
