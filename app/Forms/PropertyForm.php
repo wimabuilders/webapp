@@ -14,6 +14,8 @@ class PropertyForm
 {
     public static function schema(): array
     {
+        $canSetFeatured = request()->user()->checkPermissionTo('feature property');
+
         return [
             Grid::make('PropertyForm')->schema([
                 TextInput::make('title')
@@ -75,10 +77,16 @@ class PropertyForm
                     ->preload()
                     ->relationship(titleAttribute: 'name'),
                 Grid::make('Toggles')->schema([
-                    Toggle::make('for_rent')
+                    Select::make('for_rent')
+                        ->label("Rent / Sale")
+                        ->options([
+                            0 => "For sale",
+                            1 => "For rent",
+                        ])
                         ->required(),
-                    Toggle::make('featured')
-                        ->required(),
+                    ...($canSetFeatured ? [
+                        Toggle::make('featured')
+                    ] : []),
                 ])->columns(6),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->label('Property images (drag to order)')
