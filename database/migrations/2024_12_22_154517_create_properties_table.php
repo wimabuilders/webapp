@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('property_types', function (Blueprint $table) {
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->integer('bath')->nullable();
             $table->integer('sqft')->nullable();
             $table->decimal('price', 15, 2);
-            $table->boolean('for_rent')->default(0);
+            $table->boolean('for_rent')->nullable();
             $table->string('property_type_id')->nullable();
             $table->year('year')->nullable();
             $table->boolean('featured')->default(0);
