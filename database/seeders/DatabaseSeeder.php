@@ -32,7 +32,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ThemesTableSeeder::class);
         $this->call(PropertyTableSeeder::class);
         fixPostgresSequence();
+
+        $professions = ["Civil Engineer", "Quantity Surveyor", "Architect", "Project Manager", "Structural Engineer", "Electrical Engineer", "Mechanical Engineer", "Site Supervisor", "Construction Manager", "Urban Planner", "Landscape Architect", "Building Inspector", "Health and Safety Officer", "Interior Designer", "Environmental Consultant"];
+
+        foreach ($professions as $profession) \App\Models\Profession::create(['name' => $profession]);
     }
+
 }
 
 if (!function_exists('fixPostgresSequence')) {
