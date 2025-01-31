@@ -19,3 +19,7 @@ use Wave\Facades\Wave;
 Wave::routes();
 
 Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
