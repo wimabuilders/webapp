@@ -71,7 +71,6 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
     }
 
 
-
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class, 'billable_id')->where('billable_type', 'user');
@@ -91,12 +90,14 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
         return $this->subscriptions()->where('plan_id', $plan->id)->where('status', 'active')->exists();
     }
 
-    public function plan(){
+    public function plan()
+    {
         $latest_subscription = $this->latestSubscription();
         return Plan::find($latest_subscription->plan_id);
     }
 
-    public function planInterval(){
+    public function planInterval()
+    {
         $latest_subscription = $this->latestSubscription();
         return ($latest_subscription->cycle == 'month') ? 'Monthly' : 'Yearly';
     }
@@ -111,29 +112,31 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
         return $this->hasOne(Subscription::class, 'billable_id')->where('status', 'active')->orderBy('created_at', 'desc');
     }
 
-    public function switchPlans(Plan $plan){
+    public function switchPlans(Plan $plan)
+    {
         $this->syncRoles([]);
-        $this->assignRole( $plan->role->name );
+        $this->assignRole($plan->role->name);
     }
 
-    public function invoices(){
+    public function invoices()
+    {
         $user_invoices = [];
 
-        if(is_null($this->subscription)){
+        if (is_null($this->subscription)) {
             return null;
         }
 
-        if(config('wave.billing_provider') == 'stripe'){
+        if (config('wave.billing_provider') == 'stripe') {
             $stripe = new \Stripe\StripeClient(config('wave.stripe.secret_key'));
             $subscriptions = $this->subscriptions()->get();
-            foreach($subscriptions as $subscription){
-                $invoices = $stripe->invoices->all([ 'customer' => $subscription->vendor_customer_id, 'limit' => 100 ]);
+            foreach ($subscriptions as $subscription) {
+                $invoices = $stripe->invoices->all(['customer' => $subscription->vendor_customer_id, 'limit' => 100]);
 
-                foreach($invoices as $invoice){
+                foreach ($invoices as $invoice) {
                     array_push($user_invoices, (object)[
                         'id' => $invoice->id,
                         'created' => \Carbon\Carbon::parse($invoice->created)->isoFormat('MMMM Do YYYY, h:mm:ss a'),
-                        'total' => number_format(($invoice->total /100), 2, '.', ' '),
+                        'total' => number_format(($invoice->total / 100), 2, '.', ' '),
                         'download' => $invoice->invoice_pdf
                     ]);
                 }
@@ -144,11 +147,11 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
                 'subscription_id' => $this->subscription->vendor_subscription_id
             ]);
             $responseJson = json_decode($response->body());
-            foreach($responseJson->data as $invoice){
+            foreach ($responseJson->data as $invoice) {
                 array_push($user_invoices, (object)[
                     'id' => $invoice->id,
                     'created' => \Carbon\Carbon::parse($invoice->created_at)->isoFormat('MMMM Do YYYY, h:mm:ss a'),
-                    'total' => number_format(($invoice->details->totals->subtotal /100), 2, '.', ' '),
+                    'total' => number_format(($invoice->details->totals->subtotal / 100), 2, '.', ' '),
                     'download' => '/settings/invoices/' . $invoice->id
                 ]);
             }
@@ -193,7 +196,8 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
         return !$this->changelogs->contains($latest_changelog->id);
     }
 
-    public function link(){
+    public function link()
+    {
         return url('/profile/' . $this->username);
     }
 
@@ -370,5 +374,10 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
     //         $this->role->load('permissions');
     //         $this->load('roles.permissions');
     //     }
+    // }
+
+    // public function getNameAttribute($value)
+    // {
+    //     return $value ?? 'Not available';
     // }
 }

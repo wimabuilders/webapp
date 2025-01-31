@@ -67,12 +67,17 @@ class User extends WaveUser
             // Remove all roles
             $user->syncRoles([]);
             // Assign the default role
-            $user->assignRole( config('wave.default_user_role', 'registered') );
+            $user->assignRole(config('wave.default_user_role', 'registered'));
         });
     }
 
     public function properties()
     {
         return $this->hasMany(Property::class);
+    }
+
+    public function professions()
+    {
+        return $this->belongsToMany(Profession::class);
     }
 }
