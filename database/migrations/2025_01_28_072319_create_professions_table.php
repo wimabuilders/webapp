@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->text('bio')->nullable();
             $table->integer('experience')->nullable();
             $table->boolean('is_primary')->default(false);
+            // $table->boolean('isApproved')->default(false);
             $table->timestamps();
         });
     }

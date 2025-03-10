@@ -80,4 +80,9 @@ class User extends WaveUser
     {
         return $this->belongsToMany(Profession::class);
     }
+
+    public function professionPivots()
+    {
+        return $this->hasMany(ProfessionUser::class);
+    }
 }

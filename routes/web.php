@@ -19,7 +19,8 @@ use Wave\Facades\Wave;
 Wave::routes();
 
 Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+Route::delete('/professions/{profession}', [\App\Http\Controllers\ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return redirect('/auth/login');
 });

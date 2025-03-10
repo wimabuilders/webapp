@@ -4,12 +4,12 @@
  * These are some default authentication settings
  */
 return [
-    'redirect_after_auth' => '/',
+    'redirect_after_auth' => '/dashboard',
     'registration_enabled' => true,
     'registration_show_password_same_screen' => true,
-    'registration_include_name_field' => false,
+    'registration_include_name_field' => true,
     'registration_include_password_confirmation_field' => false,
-    'registration_require_email_verification' => false,
+    'registration_require_email_verification' => true,
     'enable_branding' => true,
     'dev_mode' => false,
     'enable_2fa' => false, // Enable or disable 2FA functionality globally
@@ -18,5 +18,5 @@ return [
     'center_align_social_provider_button_content' => false,
     'center_align_text' => false,
     'social_providers_location' => 'bottom',
-    'check_account_exists_before_login' => false,
+    'check_account_exists_before_login' => true,
 ];

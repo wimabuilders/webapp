@@ -3,8 +3,7 @@
 namespace App\Livewire;
 
 use App\Forms\ProfessionForm;
-use App\Forms\PropertyForm;
-use App\Models\Property;
+use App\Models\ProfessionUser;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -19,7 +18,7 @@ class ProfessionManager extends Component implements HasForms
 
     public ?array $data = [];
 
-    public Property $property;
+    public ProfessionUser $profession;
 
     public $create = false;
     public $user_id;
@@ -34,7 +33,8 @@ class ProfessionManager extends Component implements HasForms
     public function form(Form $form): Form
     {
         return $form
-            ->schema(ProfessionForm::schema())
+            ->schema(ProfessionForm::schema(true))
+            ->columns(2)
             ->statePath('data')
             ->model($this->profession);
     }
@@ -45,13 +45,13 @@ class ProfessionManager extends Component implements HasForms
         // $this->loading = true; TODO: fix the loading display
 
         if ($this->create) {
-            $this->profession = Property::create([...$data, 'user_id' => $this->user_id]);
+            $this->profession = ProfessionUser::create([...$data, 'user_id' => $this->user_id]);
             $this->form->model($this->profession)->saveRelationships();
         } else {
             $this->profession->update($data);
         }
 
-        $this->redirectRoute('properties.index');
+        $this->redirectRoute('professions.index');
 
         Notification::make()
             ->title("profession successfully " . ($this->create ? "created." : "updated."))
