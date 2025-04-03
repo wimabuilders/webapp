@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('city')->nullable();
             $table->string('location')->nullable();
             $table->integer('bed')->nullable();
+            $table->integer('parking')->nullable();
             $table->integer('bath')->nullable();
             $table->integer('sqft')->nullable();
             $table->decimal('price', 15, 2);

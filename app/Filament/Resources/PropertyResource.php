@@ -54,12 +54,6 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('year'),
                 Tables\Columns\IconColumn::make('featured')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('lat')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('long')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()

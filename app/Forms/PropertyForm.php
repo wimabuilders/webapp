@@ -41,6 +41,8 @@ class PropertyForm
                 TextInput::make('bath')
                     ->numeric()
                     ->required(),
+                TextInput::make('parking')
+                    ->numeric(),
                 TextInput::make('sqft')
                     ->numeric(),
                 TextInput::make('price')
@@ -49,14 +51,14 @@ class PropertyForm
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(',')
                     ->prefix('Ghc'),
-                TextInput::make('lat')
-                    ->placeholder('Latitude')
-                    ->numeric()
-                    ->default(null),
-                TextInput::make('long')
-                    ->placeholder('Longitude')
-                    ->numeric()
-                    ->default(null),
+                // TextInput::make('lat')
+                //     ->placeholder('Latitude')
+                //     ->numeric()
+                //     ->default(null),
+                // TextInput::make('long')
+                //     ->placeholder('Longitude')
+                //     ->numeric()
+                //     ->default(null),
                 Select::make('property_type_id')
                     ->label('Property Type')
                     ->options(PropertyType::pluck('name', 'id')->toArray())
@@ -71,19 +73,20 @@ class PropertyForm
                     ->multiple()
                     ->preload()
                     ->relationship(titleAttribute: 'name'),
-                Select::make('tags')
+                Select::make('for_rent')
                     ->columnSpan(2)
-                    ->multiple()
-                    ->preload()
-                    ->relationship(titleAttribute: 'name'),
+                    ->label("Rent / Sale")
+                    ->options([
+                        0 => "For sale",
+                        1 => "For rent",
+                    ])
+                    ->required(),
+                // Select::make('tags')
+                //     ->columnSpan(2)
+                //     ->multiple()
+                //     ->preload()
+                //     ->relationship(titleAttribute: 'name'),
                 Grid::make('Toggles')->schema([
-                    Select::make('for_rent')
-                        ->label("Rent / Sale")
-                        ->options([
-                            0 => "For sale",
-                            1 => "For rent",
-                        ])
-                        ->required(),
                     ...($canSetFeatured ? [
                         Toggle::make('featured')
                     ] : []),
