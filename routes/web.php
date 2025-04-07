@@ -18,7 +18,14 @@ use Wave\Facades\Wave;
 // Wave routes
 Wave::routes();
 
-Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+Route::delete('/properties/{property}', function (\App\Models\Property $property) {
+    $property->delete();
+    return redirect()->route('properties.index');
+})->name('properties.destroy');
+Route::delete('/projects/{project}', function (\App\Models\Project $project) {
+    $project->delete();
+    return redirect()->route('projects.index');
+})->name('projects.destroy');
 Route::delete('/professions/{profession}', [\App\Http\Controllers\ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 Route::get('/', function () {

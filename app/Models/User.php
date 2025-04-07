@@ -76,6 +76,11 @@ class User extends WaveUser
         return $this->hasMany(Property::class);
     }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
     public function professions()
     {
         return $this->belongsToMany(Profession::class);

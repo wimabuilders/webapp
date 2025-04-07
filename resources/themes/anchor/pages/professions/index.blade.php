@@ -15,8 +15,8 @@ name('professions.index');
 
         <div class="flex justify-between items-center">
             <x-app.heading
-                title="My Professional Profiles"
-                description="Here, you can manage your professions by adding, editing or deleting them."
+                title="Service Provider profile"
+                description="Here, you can manage your service provider profiles by adding, editing or deleting them."
                 :border="false"
             />
             <x-button tag="a" href="/professions/create">Add profession</x-button>

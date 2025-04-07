@@ -37,7 +37,7 @@ name('dashboard');
             />
         </div>
 
-        <!-- <div class="flex flex-col w-full mt-5 space-y-5 md:flex-row md:space-y-0 md:mb-0 md:space-x-5">
+        {{-- <div class="flex flex-col w-full mt-5 space-y-5 md:flex-row md:space-y-0 md:mb-0 md:space-x-5">
             <x-app.dashboard-card
                 href="https://github.com/thedevdojo/wave"
                 target="_blank"
@@ -72,6 +72,6 @@ name('dashboard');
                 @admin
                 <x-app.message-for-admin/>
                 @endadmin
-        </div> -->
+        </div> --}}
     </x-app.container>
 </x-layouts.app>

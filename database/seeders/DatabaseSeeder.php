@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ChangelogsTableSeeder::class);
         $this->call(ApiKeysTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
-        $this->call(NotificationsTableSeeder::class);
+        // $this->call(NotificationsTableSeeder::class);
         $this->call(PagesTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
