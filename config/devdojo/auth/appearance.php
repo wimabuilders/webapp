@@ -15,8 +15,8 @@ return [
     'background' => [
         'color' => '#ffffff',
         'image' => '/storage/auth/background.jpg',
-        'image_overlay_color' => '#ffffff',
-        'image_overlay_opacity' => '1',
+        'image_overlay_color' => '#000000',
+        'image_overlay_opacity' => '0.67',
     ],
     'color' => [
         'text' => '#00173d',
