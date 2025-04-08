@@ -18,6 +18,9 @@ use Wave\Facades\Wave;
 // Wave routes
 Wave::routes();
 
+Route::get('/auth/register', function () {
+    return redirect()->route('auth.signup');
+})->name('auth.register');
 Route::delete('/properties/{property}', function (\App\Models\Property $property) {
     $property->delete();
     return redirect()->route('properties.index');

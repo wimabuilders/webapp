@@ -26,7 +26,7 @@ return [
         'headline' => 'Sign up',
         'subheadline' => 'Register for your free account below.',
         'show_subheadline' => false,
-        'name' => 'Name',
+        'name' => 'Full Name or Company Name',
         'email_address' => 'Email Address',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
