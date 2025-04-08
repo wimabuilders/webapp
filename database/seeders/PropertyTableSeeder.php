@@ -20,11 +20,11 @@ class PropertyTableSeeder extends Seeder
             PropertyType::create(['name' => $type]);
         }
 
-        foreach (['Pool', 'Garage', 'Garden', 'Fireplace', 'Basement', 'Solar Panels', 'Gym', 'Balcony', 'Security System', 'Air Conditioning'] as $tag) {
-            Tag::create(['name' => $tag]);
-        }
+        // foreach (['Pool', 'Garage', 'Garden', 'Fireplace', 'Basement', 'Solar Panels', 'Gym', 'Balcony', 'Security System', 'Air Conditioning'] as $tag) {
+        //     Tag::create(['name' => $tag]);
+        // }
 
-        foreach(["Air Conditioning", "Lawn", "TV Cable", "Dryer", "Outdoor Shower", "Washer", "Lake view", "Wine cellar", "Front yard", "Refrigerator",] as $feature) {
+        foreach (["Air Conditioning", "Lawn", "TV Cable", "Dryer", "Outdoor Shower", "Washer", "Lake view", "Wine cellar", "Front yard", "Refrigerator",] as $feature) {
             Feature::create(['name' => $feature]);
         }
 
