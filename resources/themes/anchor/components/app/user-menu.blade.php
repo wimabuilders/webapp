@@ -57,8 +57,8 @@
                 @endsubscriber
 
 
-                <x-app.sidebar-link :hideUntilGroupHover="false" href="{{ route('settings.profile') }}"
-                                    icon="phosphor-gear-duotone" active="false">Settings
+                <x-app.sidebar-link :hideUntilGroupHover="false" href="{{ route('profile.edit') }}"
+                                    icon="phosphor-gear-duotone" active="false">Update profile
                 </x-app.sidebar-link>
                 @notsubscriber
                 {{--<x-app.sidebar-link href="/settings/subscription" icon="phosphor-sparkle-duotone">Upgrade
