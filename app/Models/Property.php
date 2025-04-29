@@ -20,10 +20,10 @@ class Property extends Model implements HasMedia
         return $this->belongsToMany(Feature::class);
     }
 
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
+    // public function tags()
+    // {
+    //     return $this->belongsToMany(Tag::class);
+    // }
 
     public function type()
     {
