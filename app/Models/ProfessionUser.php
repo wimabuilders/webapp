@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class ProfessionUser extends Model implements HasMedia
+class ProfessionUser extends Model
 {
-    use InteractsWithMedia, HasUuids;
-
     protected $guarded = [];
 
     protected $table = 'profession_user';
@@ -23,10 +21,5 @@ class ProfessionUser extends Model implements HasMedia
     public function profession()
     {
         return $this->belongsTo(Profession::class);
-    }
-
-    public function getCertAttribute()
-    {
-        return $this->getFirstMediaUrl('certs');
     }
 }

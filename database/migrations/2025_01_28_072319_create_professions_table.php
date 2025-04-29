@@ -17,7 +17,7 @@ return new class extends Migration {
         });
 
         Schema::create('profession_user', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('profession_id')->constrained()->onDelete('cascade');
             $table->text('bio')->nullable();

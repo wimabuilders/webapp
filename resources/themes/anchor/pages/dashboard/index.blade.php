@@ -6,6 +6,10 @@ middleware(['verified']);
 name('dashboard');
 ?>
 
+@php
+    $user = auth()->user();
+@endphp
+
 <x-layouts.app>
     <x-app.container x-data class="lg:space-y-6" x-cloak>
 
@@ -29,8 +33,8 @@ name('dashboard');
                 image="https://res.cloudinary.com/dvtzmwl3l/image/upload/v1741817215/real-estate_hbh0tr.png"
             />
             <x-app.dashboard-card
-                href="{{ route('professions.index') }}"
-                title="Professional profile"
+                href="{{ route('profile.edit') }}"
+                title="{{ !$user->isCompany ? 'Professional' : 'Company' }} profile"
                 description="Showcase your expertise and increase your visibility to potential clients, contractors, and partners."
                 link_text="Manage your professional profiles"
                 image="https://res.cloudinary.com/dvtzmwl3l/image/upload/v1741817215/profile-icon_hapmf2.png"

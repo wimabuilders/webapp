@@ -2,6 +2,7 @@
 
 namespace App\Forms;
 
+use App\Models\Profession;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -33,14 +34,6 @@ class ProfileForm
                     ->maxLength(191)
                     ->placeholder('Principal name')
                     ->required(),
-                // Select::make('profession_id')
-                //     ->label('Profession')
-                //     ->relationship('profession', 'name')
-                //     ->required(),
-                // TextInput::make('experience')
-                //     ->label(fn($get) => !$get('isCompany') ? 'Years of Experience' : 'Years of Operation')
-                //     ->required()
-                //     ->numeric(),
                 TextInput::make('phone')
                     ->maxLength(191)
                     ->placeholder('Phone #')
@@ -54,28 +47,44 @@ class ProfileForm
                     ->maxLength(191)
                     ->placeholder('Website')
                     ->url(),
+                Select::make('professions')
+                    ->label(fn($get) => !$get('isCompany') ? 'Professions' : 'Services')
+                    ->options(Profession::pluck('name', 'id'))
+                    ->multiple()
+                    ->preload()
+                    ->relationship('professions', 'name')
+                    ->columnSpan(2)
+                    ->required(),
+                TextInput::make('experience')
+                    ->label(fn($get) => !$get('isCompany') ? 'Years of Experience' : 'Years of Operation')
+                    ->required()
+                    ->numeric(),
                 RichEditor::make('bio')
                     ->toolbarButtons([
                         'bold', 'italic', 'underline', 'bulletList', 'orderedList'
                     ])
                     ->columnSpanFull(),
-                SpatieMediaLibraryFileUpload::make('cert')
-                    ->label(fn($get) => !$get('isCompany') ? 'Professional Certificates' : 'Principal Certificate')
-                    ->downloadable()
-                    ->maxSize(10240)
-                    ->collection('certs')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->disk('s3')
-                    ->visibility('public'),
-                SpatieMediaLibraryFileUpload::make('regcert')
-                    ->label('Company Registration Certificate')
-                    ->hidden(fn($get) => !$get('isCompany'))
-                    ->downloadable()
-                    ->maxSize(10240)
-                    ->collection('certs')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->disk('s3')
-                    ->visibility('public'),
+                Grid::make('UserForm')->schema([
+                    SpatieMediaLibraryFileUpload::make('cert')
+                        ->label(fn($get) => !$get('isCompany') ? 'Professional Certificates' : 'Principal Certificate')
+                        ->downloadable()
+                        ->maxSize(10240)
+                        ->collection('certs')
+                        ->acceptedFileTypes(['application/pdf'])
+                        ->disk('s3')
+                        ->visibility('public'),
+                    SpatieMediaLibraryFileUpload::make('regcert')
+                        ->label('Company Registration Certificate')
+                        ->hidden(fn($get) => !$get('isCompany'))
+                        ->downloadable()
+                        ->maxSize(10240)
+                        ->collection('regcert')
+                        ->acceptedFileTypes(['application/pdf'])
+                        ->disk('s3')
+                        ->visibility('public'),
+                ])
+                    ->columnSpanFull()
+                    ->columns(2),
             ])->columns(3)
         ];
     }

@@ -38,6 +38,7 @@ class User extends WaveUser implements HasMedia
         'principal_name',
         'address',
         'website',
+        'experience',
         'bio',
     ];
 
