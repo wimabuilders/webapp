@@ -44,8 +44,7 @@ class ProfessionForm
                         ->acceptedFileTypes(['application/pdf'])
                         ->disk('s3')
                         ->visibility('public')
-                        ->columnSpanFull()
-                        ->required(),
+                        ->columnSpanFull(),
                 ])->columnSpan(1),
             Grid::make([])
                 ->schema([
