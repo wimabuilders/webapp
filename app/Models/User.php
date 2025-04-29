@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
 use Wave\Traits\HasProfileKeyValues;
 
-class User extends WaveUser
+class User extends WaveUser implements HasMedia
 {
-    use Notifiable, HasProfileKeyValues, HasUuids, HasFactory, SoftDeletes;
+    use Notifiable, HasProfileKeyValues, HasUuids, HasFactory, SoftDeletes, InteractsWithMedia;
 
     public $guard_name = 'web';
 

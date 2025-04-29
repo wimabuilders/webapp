@@ -33,6 +33,14 @@ class ProfileForm
                     ->maxLength(191)
                     ->placeholder('Principal name')
                     ->required(),
+                // Select::make('profession_id')
+                //     ->label('Profession')
+                //     ->relationship('profession', 'name')
+                //     ->required(),
+                // TextInput::make('experience')
+                //     ->label(fn($get) => !$get('isCompany') ? 'Years of Experience' : 'Years of Operation')
+                //     ->required()
+                //     ->numeric(),
                 TextInput::make('phone')
                     ->maxLength(191)
                     ->placeholder('Phone #')
@@ -51,6 +59,23 @@ class ProfileForm
                         'bold', 'italic', 'underline', 'bulletList', 'orderedList'
                     ])
                     ->columnSpanFull(),
+                SpatieMediaLibraryFileUpload::make('cert')
+                    ->label(fn($get) => !$get('isCompany') ? 'Professional Certificates' : 'Principal Certificate')
+                    ->downloadable()
+                    ->maxSize(10240)
+                    ->collection('certs')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->disk('s3')
+                    ->visibility('public'),
+                SpatieMediaLibraryFileUpload::make('regcert')
+                    ->label('Company Registration Certificate')
+                    ->hidden(fn($get) => !$get('isCompany'))
+                    ->downloadable()
+                    ->maxSize(10240)
+                    ->collection('certs')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->disk('s3')
+                    ->visibility('public'),
             ])->columns(3)
         ];
     }
