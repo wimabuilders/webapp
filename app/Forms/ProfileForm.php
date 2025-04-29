@@ -17,6 +17,11 @@ class ProfileForm
     {
         return [
             Grid::make('UserForm')->schema([
+                Toggle::make('isCompany')
+                    ->label('Select if account is for a company')
+                    ->columnSpanFull()
+                    ->live()
+                    ->inline(true),
                 TextInput::make('name')
                     ->label(fn($get) => $get('isCompany') ? 'Company Name' : 'Name')
                     ->maxLength(191)
@@ -46,11 +51,6 @@ class ProfileForm
                         'bold', 'italic', 'underline', 'bulletList', 'orderedList'
                     ])
                     ->columnSpanFull(),
-                Toggle::make('isCompany')
-                    ->label('Select if account is for a company')
-                    ->columnSpanFull()
-                    ->live()
-                    ->inline(true),
             ])->columns(3)
         ];
     }
