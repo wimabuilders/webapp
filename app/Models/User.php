@@ -90,6 +90,11 @@ class User extends WaveUser implements HasMedia
         return $this->hasMany(Project::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function professions()
     {
         return $this->belongsToMany(Profession::class);

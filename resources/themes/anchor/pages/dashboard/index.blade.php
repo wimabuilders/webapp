@@ -24,7 +24,7 @@ name('dashboard');
             :border="false"
         />
 
-        <div class="flex flex-col w-full mt-6 space-y-5 md:flex-row lg:mt-0 md:space-y-0 md:space-x-5">
+        <div class="grid grid-cols-2 w-full mt-6 gap-8 md:flex-row lg:mt-0 md:space-y-0">
             <x-app.dashboard-card
                 href="{{ route('properties.index') }}"
                 title="Properties"
@@ -38,6 +38,13 @@ name('dashboard');
                 description="Showcase your expertise and increase your visibility to potential clients, contractors, and partners."
                 link_text="Manage your professional profiles"
                 image="https://res.cloudinary.com/dvtzmwl3l/image/upload/v1741817215/profile-icon_hapmf2.png"
+            />
+            <x-app.dashboard-card
+                href="{{ route('products.index') }}"
+                title="Marketplace"
+                description="Post your products in our marketplace today to increase visibility and connect with interested buyers."
+                link_text="Manage your products"
+                image="https://res.cloudinary.com/dwdhm3rrc/image/upload/v1747902105/shop-vendor-icon_a9cahl.png"
             />
         </div>
 

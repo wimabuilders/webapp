@@ -29,6 +29,10 @@ Route::delete('/projects/{project}', function (\App\Models\Project $project) {
     $project->delete();
     return redirect()->route('projects.index');
 })->name('projects.destroy');
+Route::delete('/products/{product}', function (\App\Models\Product $product) {
+    $product->delete();
+    return redirect()->route('products.index');
+})->name('products.destroy');
 Route::delete('/professions/{profession}', [\App\Http\Controllers\ProfessionController::class, 'destroy'])->name('professions.destroy');
 
 Route::get('/', function () {

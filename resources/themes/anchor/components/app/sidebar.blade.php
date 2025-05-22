@@ -48,6 +48,9 @@
                     <x-app.sidebar-link href="{{ route('projects.index') }}" icon="phosphor-briefcase"
                                         :active="Request::routeIs('projects.*')">Projects
                     </x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{ route('products.index') }}" icon="phosphor-shopping-cart"
+                                        :active="Request::routeIs('products.*')">Products
+                    </x-app.sidebar-link>
                 </div>
             </div>
 

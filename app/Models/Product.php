@@ -17,7 +17,7 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(ProductCategory::class);
     }
 
-    public function getFirstImage()
+    public function getFirstPropertyImage()
     {
         return !empty($this->media->sortByDesc('order_column')->first()?->getUrl()) ?
             $this->media->sortByDesc('order_column')->first()->getUrl()

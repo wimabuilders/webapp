@@ -58,7 +58,7 @@ class ProductForm
                     ->panelLayout('grid')
                     ->required()
 
-            ])->columns(6)
+            ])->columns(3)
         ];
     }
 }
